@@ -24,6 +24,7 @@ public class Usuarios implements Serializable {
     private String contrasena;
     private String avatar_url;
 
+
     public int getId() {
         return id;
     }

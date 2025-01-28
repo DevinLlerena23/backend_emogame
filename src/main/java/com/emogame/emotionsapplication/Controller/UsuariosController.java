@@ -110,17 +110,40 @@ public class UsuariosController {
             String contrasena = credentials.get("contrasena");
 
             if (correo == null || contrasena == null) {
-                return ResponseEntity
-                        .badRequest()
-                        .body("Correo y contraseña son requeridos");
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Correo y contraseña son requeridos");
+                return ResponseEntity.badRequest().body(response);
             }
 
+            // Buscar usuario por correo
+            Optional<Usuarios> usuarioOpt = usuariosrepository.findByCorreo(correo);
+
+            if (!usuarioOpt.isPresent()) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Usuario no encontrado");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            }
+
+            Usuarios usuario = usuarioOpt.get();
+
+            // Verificar contraseña (asumiendo que no está encriptada por ahora)
+            if (!usuario.getContrasena().equals(contrasena)) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Contraseña incorrecta");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            }
+
+            // Si todo está bien, devolver éxito
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login exitoso");
+            response.put("usuario", usuario);
+            return ResponseEntity.ok(response);
+
         } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error en el login: " + e.getMessage());
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Error en el login: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
-        return null;
     }
 
 
