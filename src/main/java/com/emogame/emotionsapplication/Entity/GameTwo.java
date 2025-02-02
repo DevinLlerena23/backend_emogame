@@ -27,4 +27,52 @@ public class GameTwo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Usuarios user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTimeLevelOne() {
+        return timeLevelOne;
+    }
+
+    public void setTimeLevelOne(int timeLevelOne) {
+        this.timeLevelOne = timeLevelOne;
+    }
+
+    public int getTimeLevelTwo() {
+        return timeLevelTwo;
+    }
+
+    public void setTimeLevelTwo(int timeLevelTwo) {
+        this.timeLevelTwo = timeLevelTwo;
+    }
+
+    public int getTimeTotal() {
+        return timeTotal;
+    }
+
+    public void setTimeTotal(int timeTotal) {
+        this.timeTotal = timeTotal;
+    }
+
+    public Date getDayplayed() {
+        return dayplayed;
+    }
+
+    public void setDayplayed(Date dayplayed) {
+        this.dayplayed = dayplayed;
+    }
+
+    public Usuarios getUser() {
+        return user;
+    }
+
+    public void setUser(Usuarios user) {
+        this.user = user;
+    }
 }

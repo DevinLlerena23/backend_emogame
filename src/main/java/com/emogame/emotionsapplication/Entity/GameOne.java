@@ -25,4 +25,36 @@ public class GameOne implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Usuarios user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public Date getDayplayed() {
+        return dayplayed;
+    }
+
+    public void setDayplayed(Date dayplayed) {
+        this.dayplayed = dayplayed;
+    }
+
+    public Usuarios getUser() {
+        return user;
+    }
+
+    public void setUser(Usuarios user) {
+        this.user = user;
+    }
 }
