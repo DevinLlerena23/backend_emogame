@@ -22,8 +22,9 @@ public class Usuarios implements Serializable {
     private String apellido;
     private String correo;
     private String contrasena;
-    private String avatar_url;
 
+    @Column(length = 500) // Especifica el tamaño máximo del campo
+    private String avatar_url;
 
     public int getId() {
         return id;
